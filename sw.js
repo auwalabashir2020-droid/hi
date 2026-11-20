@@ -1,11 +1,13 @@
-const CACHE_NAME = 'tailor-measurement-book-v1';
+const CACHE_NAME = 'a-and-bros-v1';
 const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.json',
+  './logo.jpg',
+  './logo.svg',
+  './icon.svg',
   './icon-192.png',
-  './icon-512.png',
-  './icon.svg'
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -32,7 +34,6 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Fetch in background to revalidate cache
         fetch(event.request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse.clone()));

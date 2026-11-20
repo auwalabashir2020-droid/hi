@@ -1,13 +1,13 @@
 {
-  "name": "Tailor Measurement Book",
-  "short_name": "TailorBook",
-  "description": "Digital customer measurement notebook for tailors",
+  "name": "A AND BRO'S FABRIC AND FASHION DESIGN",
+  "short_name": "A AND BRO'S",
+  "description": "Digital customer measurement notebook for A AND BRO'S FABRIC AND FASHION DESIGN",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#18354d",
-  "theme_color": "#18354d",
+  "background_color": "#142c40",
+  "theme_color": "#142c40",
   "icons": [
     {
       "src": "./icon-192.png",
@@ -20,6 +20,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "./logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
       "src": "./icon.svg",

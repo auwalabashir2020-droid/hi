@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Tailor Measurement Book</title>
+<title>A AND BRO'S FABRIC AND FASHION DESIGN - Measurement Book</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#18354d">
+<meta name="theme-color" content="#142c40">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="TailorBook">
+<meta name="apple-mobile-web-app-title" content="A AND BRO'S">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="icon" type="image/png" href="icon-192.png">
 
 <style>
 :root{
-  --bg:#f4f6f8;
+  --bg:#f4f6f9;
   --card:#ffffff;
-  --ink:#17212b;
-  --muted:#657381;
-  --accent:#203e5a;
-  --accent-hover:#162c41;
-  --accent-light:#eaf2f8;
-  --line:#e2e8ee;
+  --ink:#142330;
+  --muted:#5c6f84;
+  --accent:#142c40;
+  --accent-hover:#0d1d2b;
+  --accent-light:#eaf1f7;
+  --gold:#d49b22;
+  --gold-glow:#ffd769;
+  --gold-bg:#fff9ed;
+  --line:#e2e8f0;
   --success:#107c41;
   --danger:#a33333;
   --danger-bg:#fff0f0;
-  --wa:#25d366;
-  --gold:#d98205;
-  --gold-bg:#fff8eb;
   --radius:16px;
 }
 *{box-sizing:border-box}
@@ -40,57 +40,121 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 header{
-  background:linear-gradient(135deg,#18354d,#345b76);
+  background:linear-gradient(135deg,#0e1e2d 0%,#142c40 50%,#204566 100%);
   color:white;
   padding:22px 20px 20px;
-  border-radius:0 0 24px 24px;
-  box-shadow:0 4px 14px rgba(24,53,77,0.18);
+  border-radius:0 0 26px 26px;
+  box-shadow:0 6px 20px rgba(14,30,45,0.25);
+  border-bottom:2px solid rgba(212,155,34,0.3);
 }
 .header-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  max-width:720px;
+  max-width:740px;
   margin:auto;
+  gap:12px;
 }
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:42px;height:42px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
-header h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.4px}
-header p{margin:4px 0 0;color:#d5e3ed;font-size:13px}
-.header-actions{display:flex;gap:8px;align-items:center}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.logo-container{
+  position:relative;
+  cursor:pointer;
+  flex-shrink:0;
+}
+.brand-logo{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2.5px solid var(--gold-glow);
+  box-shadow:0 4px 14px rgba(0,0,0,0.35);
+  background:#142c40;
+  display:block;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.logo-container:hover .brand-logo{
+  transform:scale(1.06);
+  box-shadow:0 6px 18px rgba(255,215,105,0.35);
+}
+.logo-badge-click{
+  position:absolute;
+  bottom:-4px;
+  right:-4px;
+  background:var(--gold);
+  color:#142c40;
+  border-radius:50%;
+  width:18px;
+  height:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:bold;
+  border:1.5px solid #ffffff;
+}
+.brand-text h1{
+  margin:0;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:0.5px;
+  color:#ffffff;
+  text-transform:uppercase;
+  line-height:1.2;
+}
+.brand-text p{
+  margin:3px 0 0;
+  color:#fbdc8e;
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.brand-sub{
+  display:inline-block;
+  margin-top:4px;
+  font-size:11px;
+  color:#cbdbe8;
+  background:rgba(255,255,255,0.12);
+  padding:2px 8px;
+  border-radius:10px;
+  font-weight:600;
+}
+.header-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-shrink:0;
+}
 .btn-install-header{
-  background:#ffd56b;
+  background:linear-gradient(135deg,#ffd769,#e5b842);
   color:#142c40;
   border:0;
-  border-radius:18px;
-  padding:7px 14px;
-  font-size:13px;
-  font-weight:750;
+  border-radius:20px;
+  padding:8px 14px;
+  font-size:12.5px;
+  font-weight:800;
   display:flex;
   align-items:center;
   gap:6px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
   cursor:pointer;
   transition:all .15s ease;
+  white-space:nowrap;
 }
 .btn-install-header:hover{
   background:#ffe08a;
   transform:translateY(-1px);
 }
-.stats-badge{
-  background:rgba(255,255,255,0.18);
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:600;
-  backdrop-filter:blur(4px);
-  white-space:nowrap;
-}
-main{max-width:720px;margin:auto;padding:16px}
+
+main{max-width:740px;margin:auto;padding:16px}
 
 /* Install Banner */
 .install-banner{
-  background:linear-gradient(135deg,#1b3d5b,#285276);
+  background:linear-gradient(135deg,#13283b,#204360);
   color:white;
   border-radius:var(--radius);
   padding:14px 16px;
@@ -99,21 +163,21 @@ main{max-width:720px;margin:auto;padding:16px}
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  box-shadow:0 4px 14px rgba(24,53,77,0.15);
-  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 4px 14px rgba(20,44,64,0.15);
+  border:1px solid rgba(212,155,34,0.3);
 }
 .install-banner-content{display:flex;align-items:center;gap:12px}
 .install-banner-icon{font-size:28px}
-.install-banner-text h4{margin:0;font-size:15px;font-weight:750}
+.install-banner-text h4{margin:0;font-size:14.5px;font-weight:750}
 .install-banner-text p{margin:3px 0 0;font-size:12px;color:#d8e8f5}
 .install-banner-btn{
-  background:#ffd56b;
+  background:linear-gradient(135deg,#ffd769,#e5b842);
   color:#142c40;
   border:0;
   border-radius:12px;
   padding:9px 15px;
-  font-size:13.5px;
-  font-weight:750;
+  font-size:13px;
+  font-weight:800;
   white-space:nowrap;
   cursor:pointer;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
@@ -130,7 +194,7 @@ main{max-width:720px;margin:auto;padding:16px}
 
 .tabs{
   display:flex;
-  background:#e4eaf0;
+  background:#e2e8f0;
   padding:4px;
   border-radius:14px;
   margin:4px 0 16px;
@@ -142,9 +206,9 @@ main{max-width:720px;margin:auto;padding:16px}
   padding:12px;
   border-radius:11px;
   background:transparent;
-  font-weight:700;
+  font-weight:750;
   color:var(--muted);
-  font-size:15px;
+  font-size:14.5px;
   cursor:pointer;
   transition:all .18s ease;
   display:flex;
@@ -168,6 +232,7 @@ main{max-width:720px;margin:auto;padding:16px}
   background:var(--accent-light);
   color:var(--accent);
 }
+
 .card{
   background:var(--card);
   border:1px solid var(--line);
@@ -182,7 +247,7 @@ main{max-width:720px;margin:auto;padding:16px}
   align-items:center;
   margin-bottom:12px;
 }
-h2{font-size:18px;margin:0;font-weight:750;letter-spacing:-0.2px}
+h2{font-size:17.5px;margin:0;font-weight:800;letter-spacing:-0.2px}
 label{
   display:block;
   font-size:13px;
@@ -224,10 +289,10 @@ input:focus,select:focus,textarea:focus{
   .grid{grid-template-columns:repeat(3,1fr)}
 }
 .measure{
-  background:#f8fafb;
+  background:#f8fafc;
   padding:10px 12px;
   border-radius:12px;
-  border:1px solid #edf1f4;
+  border:1px solid #edf2f7;
   transition:border-color .15s,background-color .15s;
 }
 .measure:focus-within{
@@ -245,7 +310,7 @@ input:focus,select:focus,textarea:focus{
 .measure input{
   padding:8px 10px;
   font-size:16px;
-  font-weight:600;
+  font-weight:650;
   border:1px solid #e1e7ec;
   border-radius:8px;
 }
@@ -263,7 +328,7 @@ button.action{
   padding:14px 18px;
   background:var(--accent);
   color:white;
-  font-weight:700;
+  font-weight:750;
   font-size:15px;
   width:100%;
   margin-top:16px;
@@ -322,7 +387,7 @@ button.danger{background:var(--danger-bg);color:var(--danger)}
   align-items:flex-start;
   gap:8px;
 }
-.customer h3{margin:0;font-size:16px;font-weight:750;color:#18354d}
+.customer h3{margin:0;font-size:16px;font-weight:800;color:var(--accent)}
 .customer small{color:var(--muted);display:block;margin-top:3px;font-size:12.5px}
 .customer small a{color:inherit;text-decoration:none;font-weight:600}
 .customer small a:hover{text-decoration:underline;color:var(--accent)}
@@ -342,8 +407,8 @@ button.danger{background:var(--danger-bg);color:var(--danger)}
   font-size:13px;
 }
 .customer .data span{
-  background:#f8fafb;
-  border:1px solid #edf1f4;
+  background:#f8fafc;
+  border:1px solid #edf2f7;
   padding:7px 9px;
   border-radius:8px;
   display:flex;
@@ -358,7 +423,7 @@ button.danger{background:var(--danger-bg);color:var(--danger)}
 }
 .customer .data span .val{
   font-size:14px;
-  font-weight:700;
+  font-weight:750;
   color:#1c2d3d;
   margin-top:2px;
 }
@@ -437,12 +502,12 @@ footer{
   transform:translateX(-50%) translateY(0);
 }
 
-/* Modal for Install Instructions */
+/* Modals */
 .modal-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.55);
-  backdrop-filter:blur(3px);
+  background:rgba(10,22,33,0.7);
+  backdrop-filter:blur(4px);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -459,10 +524,10 @@ footer{
 .modal{
   background:white;
   width:100%;
-  max-width:440px;
-  border-radius:20px;
+  max-width:460px;
+  border-radius:22px;
   padding:22px;
-  box-shadow:0 12px 36px rgba(0,0,0,0.25);
+  box-shadow:0 12px 36px rgba(0,0,0,0.3);
   transform:translateY(12px);
   transition:transform .2s ease;
 }
@@ -478,8 +543,8 @@ footer{
 .modal-header h3{
   margin:0;
   font-size:18px;
-  font-weight:750;
-  color:#18354d;
+  font-weight:800;
+  color:#142c40;
 }
 .modal-close{
   background:none;
@@ -512,10 +577,45 @@ footer{
   flex-shrink:0;
 }
 .guide-text{font-size:13.5px;color:#2c3e50;line-height:1.45}
-.guide-text b{color:#18354d}
-.modal-action{
-  width:100%;
-  margin-top:14px;
+.guide-text b{color:#142c40}
+
+/* Logo Showcase Modal */
+.logo-showcase{
+  text-align:center;
+  padding:10px 0;
+}
+.logo-large-preview{
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:0 auto 16px;
+  display:block;
+  border:4px solid var(--gold);
+  box-shadow:0 8px 24px rgba(20,44,64,0.35);
+  background:#142c40;
+}
+.logo-title-full{
+  font-size:17px;
+  font-weight:900;
+  color:#142c40;
+  margin:0 0 4px;
+  letter-spacing:0.5px;
+}
+.logo-subtitle{
+  font-size:13px;
+  color:var(--gold);
+  font-weight:750;
+  margin:0 0 16px;
+  letter-spacing:1px;
+}
+.logo-btn-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.logo-btn-grid a{
+  text-decoration:none;
 }
 </style>
 </head>
@@ -524,15 +624,19 @@ footer{
 <header>
   <div class="header-top">
     <div class="brand">
-      <img src="icon-192.png" alt="App Icon">
-      <div>
-        <h1>Tailor Book</h1>
-        <p>Customer measurement notebook</p>
+      <div class="logo-container" onclick="openLogoModal()" title="View Brand Logo">
+        <img src="logo.jpg" alt="A AND BRO'S Logo" class="brand-logo" onerror="this.onerror=null;this.src='logo.svg';">
+        <span class="logo-badge-click">🔍</span>
+      </div>
+      <div class="brand-text">
+        <h1>A AND BRO'S</h1>
+        <p>Fabric &amp; Fashion Design</p>
+        <span class="brand-sub">Digital Measurement Book</span>
       </div>
     </div>
     <div class="header-actions">
       <button class="btn-install-header" onclick="triggerInstall()" type="button" title="Install App to phone or PC">
-        <span>📲</span> <span>Install App</span>
+        <span>📲</span> <span>Install</span>
       </button>
     </div>
   </div>
@@ -544,8 +648,8 @@ footer{
     <div class="install-banner-content">
       <div class="install-banner-icon">📲</div>
       <div class="install-banner-text">
-        <h4>Install Tailor Book App</h4>
-        <p>Use offline anytime on your home screen</p>
+        <h4>Install A AND BRO'S App</h4>
+        <p>Access your tailor measurement book offline anytime</p>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:6px">
@@ -574,7 +678,7 @@ footer{
     <div class="form-row">
       <div>
         <label for="custName">Customer Name *</label>
-        <input id="custName" placeholder="e.g. Ibrahim Aliyu" autocomplete="name">
+        <input id="custName" placeholder="e.g. Alhaji Mustapha" autocomplete="name">
       </div>
       <div>
         <label for="custPhone">Phone Number</label>
@@ -605,7 +709,7 @@ footer{
   <section class="card">
     <div class="card-header">
       <h2 id="listTitle">Men's Records</h2>
-      <span class="stats-badge" id="totalCountBadge" style="background:#eaf2f8;color:var(--accent)">0 Total</span>
+      <span class="stats-badge" id="totalCountBadge" style="background:#eaf2f8;color:var(--accent);padding:4px 10px;border-radius:12px;font-size:12px;font-weight:bold">0 Total</span>
     </div>
     
     <div class="search-box">
@@ -614,6 +718,7 @@ footer{
     </div>
 
     <div class="tools">
+      <button onclick="openLogoModal()" type="button" title="View brand logo">👑 Brand Logo</button>
       <button onclick="triggerInstall()" type="button" title="Install to home screen">📲 Install App</button>
       <button onclick="exportData()" title="Download JSON backup" type="button">📥 Export backup</button>
       <button onclick="document.getElementById('importFile').click()" title="Restore from JSON backup" type="button">📤 Import backup</button>
@@ -625,18 +730,43 @@ footer{
   </section>
 
   <footer>
-    Measurements are stored offline on this device.<br>
-    Works 100% offline without internet.
+    <b>A AND BRO'S FABRIC AND FASHION DESIGN</b><br>
+    Bespoke tailoring measurements saved safely on your device.<br>
+    Works 100% offline.
   </footer>
 </main>
 
 <div id="toast"></div>
 
+<!-- Logo Showcase Modal -->
+<div class="modal-overlay" id="logoModal" onclick="if(event.target===this)closeLogoModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>👑 Brand Logo</h3>
+      <button class="modal-close" onclick="closeLogoModal()" type="button">✕</button>
+    </div>
+    <div class="logo-showcase">
+      <img src="logo.jpg" alt="A AND BRO'S FABRIC AND FASHION DESIGN" class="logo-large-preview" onerror="this.onerror=null;this.src='logo.svg';">
+      <h4 class="logo-title-full">A AND BRO'S</h4>
+      <p class="logo-subtitle">FABRIC AND FASHION DESIGN</p>
+      <div class="logo-btn-grid">
+        <a href="logo.jpg" download="A-AND-BROS-LOGO.jpg" class="action" style="background:var(--gold);color:#142c40;font-weight:800;font-size:13px;padding:10px 12px;margin:0">
+          📥 Download JPG
+        </a>
+        <a href="logo.svg" download="A-AND-BROS-LOGO.svg" class="action" style="background:var(--accent);color:#fff;font-weight:800;font-size:13px;padding:10px 12px;margin:0">
+          📥 Download SVG
+        </a>
+      </div>
+    </div>
+    <button class="action secondary" style="width:100%;margin-top:14px" onclick="closeLogoModal()" type="button">Close</button>
+  </div>
+</div>
+
 <!-- Install Guide Modal -->
 <div class="modal-overlay" id="installModal" onclick="if(event.target===this)closeInstallModal()">
   <div class="modal">
     <div class="modal-header">
-      <h3>📲 Install Tailor Book App</h3>
+      <h3>📲 Install A AND BRO'S App</h3>
       <button class="modal-close" onclick="closeInstallModal()" type="button">✕</button>
     </div>
     <div id="modalInstructions">
@@ -655,11 +785,11 @@ footer{
       <div class="guide-step">
         <div class="guide-num">✓</div>
         <div class="guide-text">
-          The app will appear directly on your phone home screen and works 100% offline!
+          The app will be installed on your phone with the <b>A AND BRO'S</b> logo and works offline!
         </div>
       </div>
     </div>
-    <button class="action modal-action" onclick="closeInstallModal()" type="button">Got it!</button>
+    <button class="action" style="width:100%;margin-top:14px" onclick="closeInstallModal()" type="button">Got it!</button>
   </div>
 </div>
 
@@ -671,6 +801,14 @@ if ('serviceWorker' in navigator) {
       .then(reg => console.log('ServiceWorker registered:', reg.scope))
       .catch(err => console.log('ServiceWorker registration error:', err));
   });
+}
+
+// Logo Modal Controls
+function openLogoModal() {
+  document.getElementById("logoModal").classList.add("open");
+}
+function closeLogoModal() {
+  document.getElementById("logoModal").classList.remove("open");
 }
 
 // PWA Install prompt handling
@@ -688,7 +826,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 window.addEventListener('appinstalled', () => {
   deferredPrompt = null;
   installBanner.classList.add('hidden');
-  showToast("Tailor Book installed successfully!");
+  showToast("A AND BRO'S App installed successfully!");
 });
 
 function triggerInstall() {
@@ -701,7 +839,6 @@ function triggerInstall() {
       deferredPrompt = null;
     });
   } else {
-    // Show instruction modal depending on device
     openInstallModal();
   }
 }
@@ -950,7 +1087,7 @@ function renderCustomers() {
         ${c.notes ? `<div class="notes-box">📝 <b>Note:</b> ${esc(c.notes)}</div>` : ""}
         <div class="actions">
           <button class="edit" onclick="editCustomer('${c.id}')" type="button">✏️ Edit</button>
-          <button class="share-btn" onclick="copyMeasurements('${c.id}')" type="button">📋 Copy Details</button>
+          <button class="share-btn" onclick="copyMeasurements('${c.id}')" type="button">📋 Copy</button>
           ${c.phone ? `<button class="share-btn" style="background:#e7f8ee;color:#128c7e" onclick="shareWhatsApp('${c.id}')" type="button">💬 WhatsApp</button>` : ''}
           <button class="del" onclick="deleteCustomer('${c.id}')" type="button">🗑️ Delete</button>
         </div>
@@ -999,17 +1136,17 @@ function deleteCustomer(id) {
 function getFormattedSummary(c) {
   const unitLabel = c.unit === "cm" ? "cm" : "in";
   const lines = [
-    `*TAILOR MEASUREMENTS*`,
+    `*A AND BRO'S FABRIC AND FASHION DESIGN*`,
     `Customer: *${c.name}*`,
     c.phone ? `Phone: ${c.phone}` : null,
     `Type: ${c.type === "men" ? "Men's Wear" : "Women's Wear"}`,
     `Unit: ${unitLabel}`,
-    `-------------------`,
+    `--------------------------------`,
     ...(fieldsByType[c.type] || []).map(([code, label]) => {
       const val = c.measurements && c.measurements[code];
       return `${label} (${code}): ${val ? val + " " + unitLabel : "—"}`;
     }),
-    c.notes ? `-------------------\nNotes: ${c.notes}` : null
+    c.notes ? `--------------------------------\nNotes: ${c.notes}` : null
   ].filter(Boolean);
   return lines.join("\n");
 }
@@ -1075,7 +1212,7 @@ function exportData() {
   const a = document.createElement("a");
   const dateStr = new Date().toISOString().slice(0, 10);
   a.href = URL.createObjectURL(blob);
-  a.download = `tailor-measurements-backup-${dateStr}.json`;
+  a.download = `a-and-bros-measurements-backup-${dateStr}.json`;
   a.click();
   URL.revokeObjectURL(a.href);
   showToast("Backup exported!");
@@ -1109,7 +1246,7 @@ function exportCSV() {
   const a = document.createElement("a");
   const dateStr = new Date().toISOString().slice(0, 10);
   a.href = URL.createObjectURL(blob);
-  a.download = `tailor-measurements-${dateStr}.csv`;
+  a.download = `a-and-bros-measurements-${dateStr}.csv`;
   a.click();
   URL.revokeObjectURL(a.href);
   showToast("CSV exported!");

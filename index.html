@@ -2,8 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Tailor Measurement Book</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#18354d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TailorBook">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" href="icon-192.png">
+
 <style>
 :root{
   --bg:#f4f6f8;
@@ -18,6 +27,8 @@
   --danger:#a33333;
   --danger-bg:#fff0f0;
   --wa:#25d366;
+  --gold:#d98205;
+  --gold-bg:#fff8eb;
   --radius:16px;
 }
 *{box-sizing:border-box}
@@ -31,19 +42,41 @@ body{
 header{
   background:linear-gradient(135deg,#18354d,#345b76);
   color:white;
-  padding:26px 20px 22px;
+  padding:22px 20px 20px;
   border-radius:0 0 24px 24px;
   box-shadow:0 4px 14px rgba(24,53,77,0.18);
 }
 .header-top{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
+  align-items:center;
   max-width:720px;
   margin:auto;
 }
-header h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-0.4px}
-header p{margin:6px 0 0;color:#d5e3ed;font-size:14px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:42px;height:42px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.25)}
+header h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.4px}
+header p{margin:4px 0 0;color:#d5e3ed;font-size:13px}
+.header-actions{display:flex;gap:8px;align-items:center}
+.btn-install-header{
+  background:#ffd56b;
+  color:#142c40;
+  border:0;
+  border-radius:18px;
+  padding:7px 14px;
+  font-size:13px;
+  font-weight:750;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.btn-install-header:hover{
+  background:#ffe08a;
+  transform:translateY(-1px);
+}
 .stats-badge{
   background:rgba(255,255,255,0.18);
   padding:6px 12px;
@@ -54,6 +87,47 @@ header p{margin:6px 0 0;color:#d5e3ed;font-size:14px}
   white-space:nowrap;
 }
 main{max-width:720px;margin:auto;padding:16px}
+
+/* Install Banner */
+.install-banner{
+  background:linear-gradient(135deg,#1b3d5b,#285276);
+  color:white;
+  border-radius:var(--radius);
+  padding:14px 16px;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow:0 4px 14px rgba(24,53,77,0.15);
+  border:1px solid rgba(255,255,255,0.15);
+}
+.install-banner-content{display:flex;align-items:center;gap:12px}
+.install-banner-icon{font-size:28px}
+.install-banner-text h4{margin:0;font-size:15px;font-weight:750}
+.install-banner-text p{margin:3px 0 0;font-size:12px;color:#d8e8f5}
+.install-banner-btn{
+  background:#ffd56b;
+  color:#142c40;
+  border:0;
+  border-radius:12px;
+  padding:9px 15px;
+  font-size:13.5px;
+  font-weight:750;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+.install-banner-close{
+  background:transparent;
+  border:0;
+  color:#a5c2d8;
+  font-size:18px;
+  padding:4px 8px;
+  cursor:pointer;
+  line-height:1;
+}
+
 .tabs{
   display:flex;
   background:#e4eaf0;
@@ -323,7 +397,7 @@ button.danger{background:var(--danger-bg);color:var(--danger)}
 .del:hover{background:#fee2e2}
 .share-btn{background:#e8f7ee;color:#0e7039}
 .share-btn:hover{background:#d3f1de}
-.hidden{display:none}
+.hidden{display:none !important}
 .empty{
   text-align:center;
   padding:32px 16px;
@@ -356,26 +430,130 @@ footer{
   opacity:0;
   pointer-events:none;
   transition:all .25s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index:999;
+  z-index:9999;
 }
 #toast.show{
   opacity:1;
   transform:translateX(-50%) translateY(0);
 }
+
+/* Modal for Install Instructions */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:10000;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+.modal-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.modal{
+  background:white;
+  width:100%;
+  max-width:440px;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 12px 36px rgba(0,0,0,0.25);
+  transform:translateY(12px);
+  transition:transform .2s ease;
+}
+.modal-overlay.open .modal{
+  transform:translateY(0);
+}
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+.modal-header h3{
+  margin:0;
+  font-size:18px;
+  font-weight:750;
+  color:#18354d;
+}
+.modal-close{
+  background:none;
+  border:0;
+  font-size:22px;
+  color:var(--muted);
+  cursor:pointer;
+  padding:2px 8px;
+}
+.guide-step{
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+  background:#f8fafc;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #eef2f6;
+}
+.guide-num{
+  background:var(--accent);
+  color:white;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  font-size:13px;
+  flex-shrink:0;
+}
+.guide-text{font-size:13.5px;color:#2c3e50;line-height:1.45}
+.guide-text b{color:#18354d}
+.modal-action{
+  width:100%;
+  margin-top:14px;
+}
 </style>
 </head>
 <body>
+
 <header>
   <div class="header-top">
-    <div>
-      <h1>🧵 Measurement Book</h1>
-      <p>Digital customer measurement notebook for tailors</p>
+    <div class="brand">
+      <img src="icon-192.png" alt="App Icon">
+      <div>
+        <h1>Tailor Book</h1>
+        <p>Customer measurement notebook</p>
+      </div>
     </div>
-    <div class="stats-badge" id="totalCountBadge">0 Customers</div>
+    <div class="header-actions">
+      <button class="btn-install-header" onclick="triggerInstall()" type="button" title="Install App to phone or PC">
+        <span>📲</span> <span>Install App</span>
+      </button>
+    </div>
   </div>
 </header>
 
 <main>
+  <!-- Interactive PWA Install Banner -->
+  <div class="install-banner" id="installBanner">
+    <div class="install-banner-content">
+      <div class="install-banner-icon">📲</div>
+      <div class="install-banner-text">
+        <h4>Install Tailor Book App</h4>
+        <p>Use offline anytime on your home screen</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button class="install-banner-btn" onclick="triggerInstall()" type="button">Install</button>
+      <button class="install-banner-close" onclick="dismissInstallBanner()" type="button" title="Dismiss">✕</button>
+    </div>
+  </div>
+
   <div class="tabs">
     <button id="menTab" class="active" onclick="setType('men')" type="button">
       <span>Men's Wear</span>
@@ -427,6 +605,7 @@ footer{
   <section class="card">
     <div class="card-header">
       <h2 id="listTitle">Men's Records</h2>
+      <span class="stats-badge" id="totalCountBadge" style="background:#eaf2f8;color:var(--accent)">0 Total</span>
     </div>
     
     <div class="search-box">
@@ -435,6 +614,7 @@ footer{
     </div>
 
     <div class="tools">
+      <button onclick="triggerInstall()" type="button" title="Install to home screen">📲 Install App</button>
       <button onclick="exportData()" title="Download JSON backup" type="button">📥 Export backup</button>
       <button onclick="document.getElementById('importFile').click()" title="Restore from JSON backup" type="button">📤 Import backup</button>
       <button onclick="exportCSV()" title="Export spreadsheet" type="button">📊 Export CSV</button>
@@ -445,14 +625,118 @@ footer{
   </section>
 
   <footer>
-    Measurements are stored offline in your device browser.<br>
-    Regularly export a backup to keep your records safe.
+    Measurements are stored offline on this device.<br>
+    Works 100% offline without internet.
   </footer>
 </main>
 
 <div id="toast"></div>
 
+<!-- Install Guide Modal -->
+<div class="modal-overlay" id="installModal" onclick="if(event.target===this)closeInstallModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📲 Install Tailor Book App</h3>
+      <button class="modal-close" onclick="closeInstallModal()" type="button">✕</button>
+    </div>
+    <div id="modalInstructions">
+      <div class="guide-step">
+        <div class="guide-num">1</div>
+        <div class="guide-text" id="step1Text">
+          Tap the <b>menu (⋮)</b> in Chrome or the <b>Share icon</b> in Safari.
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="guide-num">2</div>
+        <div class="guide-text" id="step2Text">
+          Select <b>"Install App"</b> or <b>"Add to Home Screen"</b>.
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="guide-num">✓</div>
+        <div class="guide-text">
+          The app will appear directly on your phone home screen and works 100% offline!
+        </div>
+      </div>
+    </div>
+    <button class="action modal-action" onclick="closeInstallModal()" type="button">Got it!</button>
+  </div>
+</div>
+
 <script>
+// Register Service Worker for PWA & Offline Support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('ServiceWorker registered:', reg.scope))
+      .catch(err => console.log('ServiceWorker registration error:', err));
+  });
+}
+
+// PWA Install prompt handling
+let deferredPrompt = null;
+const installBanner = document.getElementById("installBanner");
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem('tailorBook_hideInstallBanner')) {
+    installBanner.classList.remove('hidden');
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  installBanner.classList.add('hidden');
+  showToast("Tailor Book installed successfully!");
+});
+
+function triggerInstall() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showToast("Installing app...");
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    // Show instruction modal depending on device
+    openInstallModal();
+  }
+}
+
+function dismissInstallBanner() {
+  installBanner.classList.add('hidden');
+  localStorage.setItem('tailorBook_hideInstallBanner', 'true');
+}
+
+function openInstallModal() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(navigator.userAgent);
+  
+  const step1 = document.getElementById("step1Text");
+  const step2 = document.getElementById("step2Text");
+  
+  if (isIOS) {
+    step1.innerHTML = 'Tap the <b>Share icon (⎋ / <span style="font-size:16px">↑</span>)</b> at the bottom of Safari.';
+    step2.innerHTML = 'Scroll down and tap <b>"Add to Home Screen"</b>.';
+  } else if (isAndroid) {
+    step1.innerHTML = 'Tap the <b>three dots menu (⋮)</b> in Chrome or your browser.';
+    step2.innerHTML = 'Tap <b>"Install app"</b> or <b>"Add to Home screen"</b>.';
+  } else {
+    step1.innerHTML = 'Click the <b>Install icon (⊕)</b> in your browser address bar (top right).';
+    step2.innerHTML = 'Click <b>"Install"</b> to add to your desktop or taskbar.';
+  }
+  
+  document.getElementById("installModal").classList.add("open");
+}
+
+function closeInstallModal() {
+  document.getElementById("installModal").classList.remove("open");
+}
+
+// Data and Form Management
 const fieldsByType = {
   men: [
     ["SH", "Shoulder"],
@@ -523,7 +807,7 @@ function updateBadges() {
   const womenCount = customers.filter(c => c.type === "women").length;
   dom.menCountBadge.textContent = menCount;
   dom.womenCountBadge.textContent = womenCount;
-  dom.totalCountBadge.textContent = `${customers.length} Customer${customers.length === 1 ? '' : 's'}`;
+  dom.totalCountBadge.textContent = `${customers.length} Total`;
 }
 
 function setType(t) {
@@ -802,7 +1086,6 @@ function exportCSV() {
     alert("No customer records to export.");
     return;
   }
-  // Collect all unique measurement codes
   const allCodes = ["SH", "HN", "BL", "TL", "N", "CH", "BUS", "SP", "HIPS", "SLV", "GOWN", "SL"];
   const headers = ["ID", "Name", "Phone", "Type", "Unit", "Notes", "Updated", ...allCodes];
 
@@ -840,7 +1123,6 @@ function importData(e) {
     try {
       const incoming = JSON.parse(r.result);
       if (!Array.isArray(incoming)) throw new Error("Format error");
-      // Basic validation
       const valid = incoming.filter(x => x && typeof x === "object" && x.name);
       if (!valid.length && incoming.length > 0) throw new Error("No valid records");
       customers = incoming;

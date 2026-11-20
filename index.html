@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Tailor Measurement Book</title>
+<style>
+:root{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --ink:#17212b;
+  --muted:#657381;
+  --accent:#203e5a;
+  --accent-hover:#162c41;
+  --accent-light:#eaf2f8;
+  --line:#e2e8ee;
+  --success:#107c41;
+  --danger:#a33333;
+  --danger-bg:#fff0f0;
+  --wa:#25d366;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+header{
+  background:linear-gradient(135deg,#18354d,#345b76);
+  color:white;
+  padding:26px 20px 22px;
+  border-radius:0 0 24px 24px;
+  box-shadow:0 4px 14px rgba(24,53,77,0.18);
+}
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  max-width:720px;
+  margin:auto;
+}
+header h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-0.4px}
+header p{margin:6px 0 0;color:#d5e3ed;font-size:14px}
+.stats-badge{
+  background:rgba(255,255,255,0.18);
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  backdrop-filter:blur(4px);
+  white-space:nowrap;
+}
+main{max-width:720px;margin:auto;padding:16px}
+.tabs{
+  display:flex;
+  background:#e4eaf0;
+  padding:4px;
+  border-radius:14px;
+  margin:4px 0 16px;
+  gap:4px;
+}
+.tabs button{
+  flex:1;
+  border:0;
+  padding:12px;
+  border-radius:11px;
+  background:transparent;
+  font-weight:700;
+  color:var(--muted);
+  font-size:15px;
+  cursor:pointer;
+  transition:all .18s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+.tabs button.active{
+  background:white;
+  color:var(--ink);
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+.tabs button .badge{
+  background:#edf2f6;
+  font-size:11px;
+  padding:2px 8px;
+  border-radius:10px;
+  color:var(--muted);
+}
+.tabs button.active .badge{
+  background:var(--accent-light);
+  color:var(--accent);
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 3px 12px rgba(19,43,59,0.05);
+}
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+h2{font-size:18px;margin:0;font-weight:750;letter-spacing:-0.2px}
+label{
+  display:block;
+  font-size:13px;
+  color:var(--muted);
+  font-weight:600;
+  margin:12px 0 5px;
+}
+input,select,textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:white;
+  color:var(--ink);
+  font:inherit;
+  font-size:15px;
+  outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#5e8eaf;
+  box-shadow:0 0 0 3px rgba(94,142,175,0.18);
+}
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:480px){
+  .form-row{grid-template-columns:1fr}
+}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:6px;
+}
+@media(min-width:560px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+.measure{
+  background:#f8fafb;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid #edf1f4;
+  transition:border-color .15s,background-color .15s;
+}
+.measure:focus-within{
+  background:white;
+  border-color:#5e8eaf;
+}
+.measure label{
+  margin:0 0 4px;
+  color:#3e5364;
+  font-size:12px;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+}
+.measure input{
+  padding:8px 10px;
+  font-size:16px;
+  font-weight:600;
+  border:1px solid #e1e7ec;
+  border-radius:8px;
+}
+button{
+  cursor:pointer;
+  font-family:inherit;
+  transition:transform .08s, background-color .15s, opacity .15s;
+}
+button:active{
+  transform:scale(0.98);
+}
+button.action{
+  border:0;
+  border-radius:12px;
+  padding:14px 18px;
+  background:var(--accent);
+  color:white;
+  font-weight:700;
+  font-size:15px;
+  width:100%;
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+button.action:hover{background:var(--accent-hover)}
+button.secondary{background:#edf2f6;color:#23394b;margin-top:8px}
+button.secondary:hover{background:#e2e9ef}
+button.danger{background:var(--danger-bg);color:var(--danger)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tools button{
+  flex:1;
+  min-width:110px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px 12px;
+  font-weight:650;
+  font-size:13px;
+  background:#edf2f6;
+  color:#253d50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+.tools button:hover{background:#e3eaef}
+.search-box{position:relative}
+.search-box input{padding-left:36px}
+.search-box .icon{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+  pointer-events:none;
+}
+.customer{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  margin:12px 0;
+  background:#ffffff;
+  box-shadow:0 1px 4px rgba(0,0,0,0.02);
+  transition:box-shadow .15s, border-color .15s;
+}
+.customer:hover{
+  border-color:#cbd8e3;
+  box-shadow:0 3px 10px rgba(0,0,0,0.05);
+}
+.customer-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+}
+.customer h3{margin:0;font-size:16px;font-weight:750;color:#18354d}
+.customer small{color:var(--muted);display:block;margin-top:3px;font-size:12.5px}
+.customer small a{color:inherit;text-decoration:none;font-weight:600}
+.customer small a:hover{text-decoration:underline;color:var(--accent)}
+.customer .unit-tag{
+  background:#f0f4f8;
+  padding:2px 7px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:650;
+  color:#486581;
+}
+.customer .data{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(105px,1fr));
+  gap:6px;
+  margin-top:12px;
+  font-size:13px;
+}
+.customer .data span{
+  background:#f8fafb;
+  border:1px solid #edf1f4;
+  padding:7px 9px;
+  border-radius:8px;
+  display:flex;
+  flex-direction:column;
+}
+.customer .data span .lbl{
+  font-size:10.5px;
+  color:var(--muted);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+}
+.customer .data span .val{
+  font-size:14px;
+  font-weight:700;
+  color:#1c2d3d;
+  margin-top:2px;
+}
+.customer .notes-box{
+  font-size:13px;
+  color:#415160;
+  margin:10px 0 0;
+  background:#fffdef;
+  border:1px solid #f2ecc8;
+  padding:8px 10px;
+  border-radius:8px;
+  line-height:1.4;
+}
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.actions button{
+  flex:1;
+  min-width:70px;
+  padding:8px 10px;
+  border:0;
+  border-radius:9px;
+  font-weight:650;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+.edit{background:var(--accent-light);color:#1c435f}
+.edit:hover{background:#dbe8f3}
+.del{background:var(--danger-bg);color:var(--danger)}
+.del:hover{background:#fee2e2}
+.share-btn{background:#e8f7ee;color:#0e7039}
+.share-btn:hover{background:#d3f1de}
+.hidden{display:none}
+.empty{
+  text-align:center;
+  padding:32px 16px;
+  color:var(--muted);
+  background:#fafbfc;
+  border:1px dashed #dbe2e8;
+  border-radius:14px;
+  margin:12px 0;
+}
+.empty-icon{font-size:32px;margin-bottom:8px;display:block}
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:12.5px;
+  padding:16px 12px 30px;
+  line-height:1.6;
+}
+#toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:#1e293b;
+  color:white;
+  padding:10px 18px;
+  border-radius:24px;
+  font-size:14px;
+  font-weight:600;
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  opacity:0;
+  pointer-events:none;
+  transition:all .25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index:999;
+}
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <div>
+      <h1>🧵 Measurement Book</h1>
+      <p>Digital customer measurement notebook for tailors</p>
+    </div>
+    <div class="stats-badge" id="totalCountBadge">0 Customers</div>
+  </div>
+</header>
+
+<main>
+  <div class="tabs">
+    <button id="menTab" class="active" onclick="setType('men')" type="button">
+      <span>Men's Wear</span>
+      <span class="badge" id="menCountBadge">0</span>
+    </button>
+    <button id="womenTab" onclick="setType('women')" type="button">
+      <span>Women's Wear</span>
+      <span class="badge" id="womenCountBadge">0</span>
+    </button>
+  </div>
+
+  <section class="card">
+    <div class="card-header">
+      <h2 id="formTitle">Add Men's Customer</h2>
+    </div>
+    <input id="editId" type="hidden">
+    
+    <div class="form-row">
+      <div>
+        <label for="custName">Customer Name *</label>
+        <input id="custName" placeholder="e.g. Ibrahim Aliyu" autocomplete="name">
+      </div>
+      <div>
+        <label for="custPhone">Phone Number</label>
+        <input id="custPhone" type="tel" placeholder="e.g. 08012345678" autocomplete="tel">
+      </div>
+    </div>
+
+    <label for="unitSelect">Measurement Unit</label>
+    <select id="unitSelect">
+      <option value="in">Inches (in)</option>
+      <option value="cm">Centimeters (cm)</option>
+    </select>
+
+    <label style="margin-top:14px">Body Measurements (<span id="unitDisplay">in</span>)</label>
+    <div class="grid" id="fields"></div>
+
+    <label for="custNotes">Notes / Style details</label>
+    <textarea id="custNotes" rows="2" placeholder="Fabric color, pocket style, collar type, cap size, delivery date…"></textarea>
+
+    <button class="action" id="saveBtn" onclick="saveCustomer()" type="button">
+      <span>💾</span> <span id="saveBtnText">Save measurements</span>
+    </button>
+    <button class="action secondary hidden" id="cancelEdit" onclick="cancelEditing()" type="button">
+      Cancel editing
+    </button>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <h2 id="listTitle">Men's Records</h2>
+    </div>
+    
+    <div class="search-box">
+      <span class="icon">🔎</span>
+      <input id="searchInput" placeholder="Search by name, phone or style note…" oninput="renderCustomers()">
+    </div>
+
+    <div class="tools">
+      <button onclick="exportData()" title="Download JSON backup" type="button">📥 Export backup</button>
+      <button onclick="document.getElementById('importFile').click()" title="Restore from JSON backup" type="button">📤 Import backup</button>
+      <button onclick="exportCSV()" title="Export spreadsheet" type="button">📊 Export CSV</button>
+      <input id="importFile" type="file" accept=".json,application/json" style="display:none" onchange="importData(event)">
+    </div>
+
+    <div id="list"></div>
+  </section>
+
+  <footer>
+    Measurements are stored offline in your device browser.<br>
+    Regularly export a backup to keep your records safe.
+  </footer>
+</main>
+
+<div id="toast"></div>
+
+<script>
+const fieldsByType = {
+  men: [
+    ["SH", "Shoulder"],
+    ["HN", "Hannu / Sleeve"],
+    ["BL", "Body Length"],
+    ["TL", "Trouser Length"],
+    ["N", "Neck"],
+    ["CH", "Chest"]
+  ],
+  women: [
+    ["BUS", "Bust"],
+    ["SP", "Shoulder"],
+    ["BL", "Body Length"],
+    ["HIPS", "Hips"],
+    ["SLV", "Sleeve"],
+    ["GOWN", "Gown Length"],
+    ["SL", "Skirt Length"]
+  ]
+};
+
+let currentType = "men";
+let customers = [];
+
+try {
+  customers = JSON.parse(localStorage.getItem("tailorBook_v1") || "[]");
+  if (!Array.isArray(customers)) customers = [];
+} catch (e) {
+  customers = [];
+}
+
+const dom = {
+  menTab: document.getElementById("menTab"),
+  womenTab: document.getElementById("womenTab"),
+  menCountBadge: document.getElementById("menCountBadge"),
+  womenCountBadge: document.getElementById("womenCountBadge"),
+  totalCountBadge: document.getElementById("totalCountBadge"),
+  formTitle: document.getElementById("formTitle"),
+  listTitle: document.getElementById("listTitle"),
+  editId: document.getElementById("editId"),
+  name: document.getElementById("custName"),
+  phone: document.getElementById("custPhone"),
+  unit: document.getElementById("unitSelect"),
+  unitDisplay: document.getElementById("unitDisplay"),
+  fields: document.getElementById("fields"),
+  notes: document.getElementById("custNotes"),
+  cancelEdit: document.getElementById("cancelEdit"),
+  saveBtnText: document.getElementById("saveBtnText"),
+  search: document.getElementById("searchInput"),
+  list: document.getElementById("list"),
+  toast: document.getElementById("toast")
+};
+
+dom.unit.addEventListener("change", () => {
+  dom.unitDisplay.textContent = dom.unit.value;
+});
+
+function showToast(msg) {
+  dom.toast.textContent = msg;
+  dom.toast.classList.add("show");
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => {
+    dom.toast.classList.remove("show");
+  }, 2400);
+}
+
+function updateBadges() {
+  const menCount = customers.filter(c => c.type === "men").length;
+  const womenCount = customers.filter(c => c.type === "women").length;
+  dom.menCountBadge.textContent = menCount;
+  dom.womenCountBadge.textContent = womenCount;
+  dom.totalCountBadge.textContent = `${customers.length} Customer${customers.length === 1 ? '' : 's'}`;
+}
+
+function setType(t) {
+  currentType = t;
+  dom.menTab.classList.toggle("active", t === "men");
+  dom.womenTab.classList.toggle("active", t === "women");
+  dom.listTitle.textContent = (t === "men" ? "Men's" : "Women's") + " Records";
+  cancelEditing();
+  renderCustomers();
+}
+
+function renderFields(values = {}) {
+  dom.fields.innerHTML = fieldsByType[currentType].map(([code, label]) => `
+    <div class="measure">
+      <label for="m_${code}">
+        <span>${label}</span>
+        <b style="color:var(--accent)">${code}</b>
+      </label>
+      <input inputmode="decimal" id="m_${code}" placeholder="${code}" value="${escAttr(values[code] || "")}">
+    </div>
+  `).join("");
+}
+
+function saveCustomer() {
+  const nameVal = dom.name.value.trim();
+  if (!nameVal) {
+    alert("Please enter the customer's name.");
+    dom.name.focus();
+    return;
+  }
+
+  const measurements = {};
+  fieldsByType[currentType].forEach(([code]) => {
+    const el = document.getElementById("m_" + code);
+    measurements[code] = el ? el.value.trim() : "";
+  });
+
+  const id = dom.editId.value || String(Date.now());
+  const record = {
+    id,
+    type: currentType,
+    name: nameVal,
+    phone: dom.phone.value.trim(),
+    unit: dom.unit.value,
+    measurements,
+    notes: dom.notes.value.trim(),
+    updated: new Date().toISOString()
+  };
+
+  const idx = customers.findIndex(c => c.id === id);
+  if (idx >= 0) {
+    customers[idx] = record;
+    showToast(`Updated ${nameVal}`);
+  } else {
+    customers.unshift(record);
+    showToast(`Saved ${nameVal}`);
+  }
+
+  persist();
+  resetForm();
+  renderCustomers();
+}
+
+function persist() {
+  try {
+    localStorage.setItem("tailorBook_v1", JSON.stringify(customers));
+  } catch (err) {
+    console.error("Failed to save to localStorage", err);
+  }
+  updateBadges();
+}
+
+function resetForm() {
+  dom.editId.value = "";
+  dom.name.value = "";
+  dom.phone.value = "";
+  dom.unit.value = "in";
+  dom.unitDisplay.textContent = "in";
+  dom.notes.value = "";
+  dom.formTitle.textContent = "Add " + (currentType === "men" ? "Men's" : "Women's") + " Customer";
+  dom.saveBtnText.textContent = "Save measurements";
+  dom.cancelEdit.classList.add("hidden");
+  renderFields();
+}
+
+function cancelEditing() {
+  resetForm();
+}
+
+function renderCustomers() {
+  updateBadges();
+  const q = dom.search.value.toLowerCase().trim();
+  const filtered = customers.filter(c => {
+    if (c.type !== currentType) return false;
+    if (!q) return true;
+    const nameMatch = (c.name || "").toLowerCase().includes(q);
+    const phoneMatch = (c.phone || "").toLowerCase().includes(q);
+    const notesMatch = (c.notes || "").toLowerCase().includes(q);
+    return nameMatch || phoneMatch || notesMatch;
+  });
+
+  if (!filtered.length) {
+    dom.list.innerHTML = `
+      <div class="empty">
+        <span class="empty-icon">📏</span>
+        <div>${q ? 'No customers found matching "' + esc(q) + '"' : 'No ' + (currentType === "men" ? "men's" : "women's") + ' customers yet.'}</div>
+        <div style="font-size:12px;margin-top:4px;color:#8594a3">${q ? 'Try another search term' : 'Fill in the form above to add your first customer'}</div>
+      </div>
+    `;
+    return;
+  }
+
+  dom.list.innerHTML = filtered.map(c => {
+    const unitLabel = c.unit === "cm" ? "cm" : "in";
+    const dateFormatted = c.updated ? new Date(c.updated).toLocaleDateString() : "";
+    const phoneDisplay = c.phone ? `
+      <a href="tel:${escAttr(c.phone)}" title="Call customer">📞 ${esc(c.phone)}</a>
+    ` : `<span style="color:#94a3b1">No phone</span>`;
+
+    const fieldList = fieldsByType[c.type] || [];
+    const measurementsHtml = fieldList.map(([code, label]) => {
+      const val = c.measurements && c.measurements[code];
+      return `
+        <span>
+          <div class="lbl">${esc(label)} (${esc(code)})</div>
+          <div class="val">${esc(val || "—")} <span style="font-size:11px;font-weight:normal;color:#788896">${val ? unitLabel : ''}</span></div>
+        </span>
+      `;
+    }).join("");
+
+    return `
+      <div class="customer" id="card-${c.id}">
+        <div class="customer-header">
+          <div>
+            <h3>${esc(c.name)}</h3>
+            <small>${phoneDisplay} · <span class="unit-tag">${unitLabel}</span> · 📅 ${dateFormatted}</small>
+          </div>
+        </div>
+        <div class="data">${measurementsHtml}</div>
+        ${c.notes ? `<div class="notes-box">📝 <b>Note:</b> ${esc(c.notes)}</div>` : ""}
+        <div class="actions">
+          <button class="edit" onclick="editCustomer('${c.id}')" type="button">✏️ Edit</button>
+          <button class="share-btn" onclick="copyMeasurements('${c.id}')" type="button">📋 Copy Details</button>
+          ${c.phone ? `<button class="share-btn" style="background:#e7f8ee;color:#128c7e" onclick="shareWhatsApp('${c.id}')" type="button">💬 WhatsApp</button>` : ''}
+          <button class="del" onclick="deleteCustomer('${c.id}')" type="button">🗑️ Delete</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function editCustomer(id) {
+  const c = customers.find(x => x.id === id);
+  if (!c) return;
+
+  if (c.type !== currentType) {
+    currentType = c.type;
+    dom.menTab.classList.toggle("active", currentType === "men");
+    dom.womenTab.classList.toggle("active", currentType === "women");
+    dom.listTitle.textContent = (currentType === "men" ? "Men's" : "Women's") + " Records";
+  }
+
+  dom.editId.value = c.id;
+  dom.name.value = c.name;
+  dom.phone.value = c.phone || "";
+  dom.unit.value = c.unit || "in";
+  dom.unitDisplay.textContent = c.unit || "in";
+  dom.notes.value = c.notes || "";
+  dom.formTitle.textContent = "Edit " + c.name;
+  dom.saveBtnText.textContent = "Update measurements";
+  dom.cancelEdit.classList.remove("hidden");
+
+  renderFields(c.measurements || {});
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  dom.name.focus();
+}
+
+function deleteCustomer(id) {
+  const c = customers.find(x => x.id === id);
+  const name = c ? c.name : "this customer";
+  if (confirm(`Are you sure you want to delete ${name}'s measurements?`)) {
+    customers = customers.filter(x => x.id !== id);
+    persist();
+    renderCustomers();
+    showToast(`Deleted ${name}`);
+  }
+}
+
+function getFormattedSummary(c) {
+  const unitLabel = c.unit === "cm" ? "cm" : "in";
+  const lines = [
+    `*TAILOR MEASUREMENTS*`,
+    `Customer: *${c.name}*`,
+    c.phone ? `Phone: ${c.phone}` : null,
+    `Type: ${c.type === "men" ? "Men's Wear" : "Women's Wear"}`,
+    `Unit: ${unitLabel}`,
+    `-------------------`,
+    ...(fieldsByType[c.type] || []).map(([code, label]) => {
+      const val = c.measurements && c.measurements[code];
+      return `${label} (${code}): ${val ? val + " " + unitLabel : "—"}`;
+    }),
+    c.notes ? `-------------------\nNotes: ${c.notes}` : null
+  ].filter(Boolean);
+  return lines.join("\n");
+}
+
+function copyMeasurements(id) {
+  const c = customers.find(x => x.id === id);
+  if (!c) return;
+  const text = getFormattedSummary(c);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast("Measurements copied to clipboard!");
+    }).catch(() => {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    showToast("Measurements copied!");
+  } catch (err) {
+    alert(text);
+  }
+  document.body.removeChild(ta);
+}
+
+function shareWhatsApp(id) {
+  const c = customers.find(x => x.id === id);
+  if (!c) return;
+  const text = encodeURIComponent(getFormattedSummary(c));
+  const cleanPhone = (c.phone || "").replace(/[^0-9]/g, "");
+  const url = cleanPhone ? `https://wa.me/${cleanPhone}?text=${text}` : `https://wa.me/?text=${text}`;
+  window.open(url, "_blank");
+}
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[ch]));
+}
+
+function escAttr(s) {
+  return String(s ?? "").replace(/"/g, '&quot;');
+}
+
+function exportData() {
+  if (!customers.length) {
+    alert("No customer records to export.");
+    return;
+  }
+  const blob = new Blob([JSON.stringify(customers, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  const dateStr = new Date().toISOString().slice(0, 10);
+  a.href = URL.createObjectURL(blob);
+  a.download = `tailor-measurements-backup-${dateStr}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("Backup exported!");
+}
+
+function exportCSV() {
+  if (!customers.length) {
+    alert("No customer records to export.");
+    return;
+  }
+  // Collect all unique measurement codes
+  const allCodes = ["SH", "HN", "BL", "TL", "N", "CH", "BUS", "SP", "HIPS", "SLV", "GOWN", "SL"];
+  const headers = ["ID", "Name", "Phone", "Type", "Unit", "Notes", "Updated", ...allCodes];
+
+  const rows = customers.map(c => [
+    c.id,
+    c.name,
+    c.phone || "",
+    c.type,
+    c.unit || "in",
+    (c.notes || "").replace(/\n/g, " "),
+    c.updated || "",
+    ...allCodes.map(code => (c.measurements && c.measurements[code]) || "")
+  ]);
+
+  const csvContent = [
+    headers.map(h => `"${h}"`).join(","),
+    ...rows.map(row => row.map(val => `"${String(val).replace(/"/g, '""')}"`).join(","))
+  ].join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const a = document.createElement("a");
+  const dateStr = new Date().toISOString().slice(0, 10);
+  a.href = URL.createObjectURL(blob);
+  a.download = `tailor-measurements-${dateStr}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("CSV exported!");
+}
+
+function importData(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const incoming = JSON.parse(r.result);
+      if (!Array.isArray(incoming)) throw new Error("Format error");
+      // Basic validation
+      const valid = incoming.filter(x => x && typeof x === "object" && x.name);
+      if (!valid.length && incoming.length > 0) throw new Error("No valid records");
+      customers = incoming;
+      persist();
+      renderCustomers();
+      showToast(`Imported ${customers.length} records!`);
+    } catch (err) {
+      alert("Invalid backup file. Please choose a valid JSON backup exported from this app.");
+    }
+  };
+  r.readAsText(f);
+  e.target.value = "";
+}
+
+// Initial render
+renderFields();
+renderCustomers();
+</script>
+</body>
+</html>

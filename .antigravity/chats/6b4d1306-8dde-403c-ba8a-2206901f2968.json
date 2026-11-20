@@ -3,7 +3,7 @@
   "name": "hi",
   "createdAt": "2026-11-20T00:29:03.314Z",
   "filename": "6b4d1306-8dde-403c-ba8a-2206901f2968.json",
-  "geminiStarted": false,
+  "geminiStarted": true,
   "messages": [
     {
       "id": "f4e927d6-4681-4a74-8cbd-baf400a21127",

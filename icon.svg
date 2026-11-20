@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142c40" />
+      <stop offset="100%" stop-color="#2a526f" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd56b" />
+      <stop offset="100%" stop-color="#e59819" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  
+  <!-- Outer Decorative Stitch Border -->
+  <rect x="28" y="28" width="456" height="456" rx="88" fill="none" stroke="#5d8ba9" stroke-width="4" stroke-dasharray="14 12" opacity="0.6"/>
+  
+  <g filter="url(#shadow)">
+    <!-- Measuring Tape Loop -->
+    <path d="M 140 180 C 140 110, 372 110, 372 180 C 372 260, 200 290, 160 360 C 130 410, 220 440, 290 420" 
+          fill="none" stroke="url(#goldGrad)" stroke-width="36" stroke-linecap="round"/>
+    
+    <!-- Measuring Tape Ticks -->
+    <path d="M 190 134 L 190 152 M 220 128 L 220 148 M 250 126 L 250 150 M 280 128 L 280 148 M 310 134 L 310 152 M 340 146 L 340 162" 
+          stroke="#784803" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Tailor Scissors Symbol -->
+    <g transform="translate(256,256) rotate(-28)">
+      <!-- Left Blade & Handle -->
+      <path d="M -15 -140 L 0 0 L -18 70 C -38 60, -70 80, -65 115 C -60 145, -25 150, -8 125 C 2 110, 0 90, 0 80" 
+            fill="none" stroke="#f0f5fa" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="-38" cy="115" r="24" fill="none" stroke="#f0f5fa" stroke-width="12"/>
+      
+      <!-- Right Blade & Handle -->
+      <path d="M 15 -140 L 0 0 L 18 70 C 38 60, 70 80, 65 115 C 60 145, 25 150, 8 125 C -2 110, 0 90, 0 80" 
+            fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="38" cy="115" r="24" fill="none" stroke="#ffffff" stroke-width="12"/>
+      
+      <!-- Hinge Pivot Screw -->
+      <circle cx="0" cy="0" r="10" fill="#e59819"/>
+      <circle cx="0" cy="0" r="4" fill="#ffffff"/>
+    </g>
+  </g>
+  
+  <!-- Text Label -->
+  <text x="256" y="475" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="34" fill="#d8e8f3" letter-spacing="2">TAILOR BOOK</text>
+</svg>

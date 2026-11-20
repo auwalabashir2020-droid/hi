@@ -40,6 +40,18 @@
       "created_at": "2026-11-20T00:54:12.946Z",
       "sender": "ios",
       "is_cancelled": false
+    },
+    {
+      "id": "d23a8bfd-9a7d-434e-8a29-147a4c66c817",
+      "role": "agent",
+      "content": "### 📲 How to Install Tailor Book on Your Phone or PC\n\nThe app is now fully configured as an installable **Progressive Web App (PWA)** with offline support.\n\n👉 **Open this link on your phone or computer:**  \n**[https://antigravity.luch.dev/site/e46b2319-bb12-4c0b-b5c8-3ac97d41c8f2/95fb06459bc9c5a1f1b61dbe/](https://antigravity.luch.dev/site/e46b2319-bb12-4c0b-b5c8-3ac97d41c8f2/95fb06459bc9c5a1f1b61dbe/)**\n\n---\n\n### Step-by-Step Installation:\n\n#### 🤖 On Android (Chrome / Samsung Internet):\n1. Open the link above in Chrome.\n2. Tap the **\"Install\"** banner at the top (or tap the **three dots ⋮** in the top right corner).\n3. Select **\"Install App\"** (or **\"Add to Home screen\"**).\n4. Tap **Install**. The **Tailor Book** icon will now appear on your home screen and in your apps list!\n\n#### 🍏 On iPhone / iPad (Safari):\n1. Open the link above in **Safari**.\n2. Tap the **Share icon** at the bottom (the square with an arrow pointing up: **⎋**).\n3. Scroll down and tap **\"Add to Home Screen\"**.\n4. Tap **Add** in the top right corner. The app will be placed directly on your phone's screen.\n\n#### 💻 On Computer (Chrome / Edge):\n1. Open the link in Chrome or Edge.\n2. Click the **Install** button on the page or the **install icon (⊕)** in the browser address bar.\n\n---\n\n### Key Features Once Installed:\n- **Works 100% Offline**: Open and manage your customer measurements even without mobile data or WiFi.\n- **Fast Standalone App**: Launches full-screen like a regular native app without browser bars.\n- **WhatsApp Integration**: Share measurements with customers or cutting assistants with one tap.",
+      "status": "completed",
+      "model": "gemini-3.8-flash-high",
+      "client_type": "gemini-bridge",
+      "parent_message_id": "9320feae-0991-4990-8d0a-d37e2f5ced7f",
+      "created_at": "2026-11-20T00:57:39.874Z",
+      "sender": "macOS",
+      "is_cancelled": false
     }
   ]
 }
